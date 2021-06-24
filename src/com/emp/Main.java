@@ -5,16 +5,12 @@ import java.util.Random;
 public class Main {
 	
 	public static final int IS_FULL_TIME = 1;
-	public static final int IS_PART_TIME = 2;
-	private static final int maxHoursPerMonth = 100;
-	private static final int EMP_RATE_PER_HRS = 20;
-	private static final int NO_OF_WORKING_DAYS = 20;
-	
+	public static final int IS_PART_TIME = 2;	
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Emp management");
-		int totalWage = computeWage();
-		System.out.println("TotalWage : "+ totalWage);
+		computeWage("DMart", 20, 20, 100);
+		computeWage("JioMart", 30, 18, 100);
 	}
 	
 	/**
@@ -22,9 +18,9 @@ public class Main {
 	 * @param company
 	 * @return total wage.
 	 */
-	private static int computeWage() {
+	private static int computeWage(String name, int empRatePerHrs, int noOfWorkingDays, int maxHrsPerMonth) {
 		int dailyHour = 0, totalEmpHour = 0, totalWorkingDays = 0;	
-		while(totalEmpHour<=maxHoursPerMonth &&totalWorkingDays<=NO_OF_WORKING_DAYS){
+		while(totalEmpHour<=maxHrsPerMonth &&totalWorkingDays<=noOfWorkingDays){
 			final int empCheck = new Random().nextInt(3);
 			totalWorkingDays++;
 			switch(empCheck){
@@ -39,7 +35,9 @@ public class Main {
 			}
 			totalEmpHour+=dailyHour;
 		}
-		int totalEmpWage = totalEmpHour * EMP_RATE_PER_HRS;
+		int totalEmpWage = totalEmpHour * empRatePerHrs;
+		
+		System.out.println("Total Emp wage for company: "+ name + " is : "+ totalEmpWage);
 		return totalEmpWage;
 	}
 
